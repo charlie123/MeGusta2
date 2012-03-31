@@ -1,0 +1,11 @@
+S:\Development\VSProjects\steam_api\PreLoader\obj\Debug\ResolveAssemblyReference.cache
+S:\Development\VSProjects\steam_api\PreLoader\obj\Debug\CitizenLauncher.frmUpdater.resources
+S:\Development\VSProjects\steam_api\PreLoader\obj\Debug\PreLoader.csproj.GenerateResource.Cache
+S:\Development\VSProjects\steam_api\PreLoader\bin\Debug\DBNetwork.Indigo.dll
+S:\Development\VSProjects\steam_api\PreLoader\bin\Debug\DBNetwork.Indigo.pdb
+S:\Development\VSProjects\steam_api\PreLoader\bin\Debug\iw4mp.exe
+S:\Development\VSProjects\steam_api\PreLoader\bin\Debug\iw4mp.pdb
+S:\Development\VSProjects\steam_api\PreLoader\obj\Debug\iw4mp.exe
+S:\Development\VSProjects\steam_api\PreLoader\obj\Debug\iw4mp.pdb
+S:\Development\VSProjects\steam_api\PreLoader\bin\Debug\MLibTorrent.dll
+S:\Development\VSProjects\steam_api\PreLoader\bin\Debug\MLibTorrent.pdb

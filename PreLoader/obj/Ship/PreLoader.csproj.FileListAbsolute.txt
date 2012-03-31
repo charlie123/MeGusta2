@@ -1,0 +1,11 @@
+S:\Development\VSProjects\steam_api\PreLoader\bin\Ship\iw4mp.exe
+S:\Development\VSProjects\steam_api\PreLoader\bin\Ship\iw4mp.pdb
+S:\Development\VSProjects\steam_api\PreLoader\bin\Ship\DBNetwork.Indigo.dll
+S:\Development\VSProjects\steam_api\PreLoader\bin\Ship\MLibTorrent.dll
+S:\Development\VSProjects\steam_api\PreLoader\bin\Ship\MLibTorrent.pdb
+S:\Development\VSProjects\steam_api\PreLoader\bin\Ship\DBNetwork.Indigo.pdb
+S:\Development\VSProjects\steam_api\PreLoader\obj\Ship\ResolveAssemblyReference.cache
+S:\Development\VSProjects\steam_api\PreLoader\obj\Ship\CitizenLauncher.frmUpdater.resources
+S:\Development\VSProjects\steam_api\PreLoader\obj\Ship\PreLoader.csproj.GenerateResource.Cache
+S:\Development\VSProjects\steam_api\PreLoader\obj\Ship\iw4mp.exe
+S:\Development\VSProjects\steam_api\PreLoader\obj\Ship\iw4mp.pdb
