@@ -1,0 +1,688 @@
+#include "stdafx.h"
+#include "hooking.h"
+#include "IniReader.h"
+
+using namespace System;
+using namespace System::Diagnostics;
+using namespace System::IO;
+using namespace System::Net;
+using namespace System::Windows::Forms;
+
+CallHook uiLoadHook1;
+DWORD uiLoadHook1Loc = 0x60DB4C;
+
+CallHook ffLoadHook1;
+DWORD ffLoadHook1Loc = 0x50D387;
+
+CallHook ffLoadHook2;
+DWORD ffLoadHook2Loc = 0x50D2E5;
+//DWORD ffLoadHook1Loc = 0x50DD67; 
+
+struct FFLoad1 {
+	const char* name;
+	int type1;
+	int type2;
+};
+
+typedef void (*LoadFF1_t)(FFLoad1* data, int count, int unknown);
+LoadFF1_t LoadFF1 = (LoadFF1_t)0x44A730;
+
+void __cdecl UILoadHook1(FFLoad1* data, int count, int unknown) {
+	FFLoad1 newData[3];
+	memcpy(&newData[0], data, sizeof(FFLoad1) * 2);
+	newData[2].name = "dlc1_ui_mp";
+	newData[2].type1 = 3;
+	newData[2].type2 = 0;
+
+	return LoadFF1(newData, 3, unknown);
+}
+
+#pragma unmanaged
+void __declspec(naked) UILoadHook1Stub() {
+	__asm jmp UILoadHook1
+}
+#pragma managed
+
+/*void __stdcall FFLoadHook1() {
+	FFLoad1 newData;
+	newData.name = "dlc1_ui_mp";
+	//newData.type1 = 2;
+	newData.type1 = 0;
+	newData.type2 = 0;
+
+	LoadFF1(&newData, 1, 0);
+}
+
+void __declspec(naked) FFLoadHook1Stub() {
+	__asm {
+		pushad
+		call FFLoadHook1
+		popad
+		jmp ffLoadHook1.pOriginal
+	}
+}*/
+
+void __cdecl FFLoadHook1(FFLoad1* data, int count, int unknown) {
+	int newCount = count + 1;
+
+	FFLoad1 newData[20];
+	memcpy(&newData[0], data, sizeof(FFLoad1) * count);
+	newData[count].name = "dlc1_ui_mp";
+	newData[count].type1 = 2;
+	newData[count].type2 = 0;
+/*
+	char debugString[255];
+	for (int i = 0; i < newCount; i++) {
+		_snprintf(debugString, 255, "file %s %d %d", newData[i].name, newData[i].type1, newData[i].type2);
+		OutputDebugStringA(debugString);
+	}
+*/
+	return LoadFF1(newData, newCount, unknown);
+}
+
+#pragma unmanaged
+void __declspec(naked) FFLoadHook1Stub() {
+	__asm {
+		jmp FFLoadHook1
+	}
+}
+#pragma managed
+
+void __cdecl FFLoadHook2(FFLoad1* data, int count, int unknown) {
+	int newCount = count + 1;
+
+	FFLoad1 newData[20];
+	memcpy(&newData[0], data, sizeof(FFLoad1) * count);
+	newData[count].name = "patch_alter_mp";
+	newData[count].type1 = 0;
+	newData[count].type2 = 0;
+
+	/*
+	char debugString[255];
+	for (int i = 0; i < newCount; i++) {
+		_snprintf(debugString, 255, "file %s %d %d", newData[i].name, newData[i].type1, newData[i].type2);
+		OutputDebugStringA(debugString);
+	}
+	*/
+
+	return LoadFF1(newData, newCount, unknown);
+}
+
+#pragma unmanaged
+void __declspec(naked) FFLoadHook2Stub() {
+	__asm {
+		jmp FFLoadHook2
+	}
+}
+#pragma managed
+
+// zone\dlc patches
+CallHook zoneLoadHook1;
+DWORD zoneLoadHook1Loc = 0x5BFD4C;
+
+CallHook zoneLoadHook2;
+DWORD zoneLoadHook2Loc = 0x45AC18;
+
+CallHook zoneLoadHook3;
+DWORD zoneLoadHook3Loc = 0x4A94A8;
+
+char zone_language[64];
+char* zone_dlc = "zone\\dlc\\";
+char* zone_alter = "zone\\alter\\";
+char* loadedPath = "";
+char* zonePath = "";
+
+char* GetZoneLocation(const char* name) {
+	String^ file = gcnew String(name) + ".ff";
+	
+	if (File::Exists("zone\\alter\\" + file)) {
+		return zone_alter;
+	}
+
+	if (File::Exists("zone\\dlc\\" + file)) {
+		return zone_dlc;
+	}
+
+	return zone_language;	
+}
+
+#pragma unmanaged
+char* GetZonePath(const char* fileName) {
+	char* language;
+	DWORD getLang = 0x4D9BA0;
+
+	__asm {
+		call getLang
+		mov language, eax
+	}
+
+	_snprintf(zone_language, 64, "zone\\%s\\", language);
+
+	// we do it a lot simpler than IW did.
+	return GetZoneLocation(fileName);
+}
+
+void __declspec(naked) ZoneLoadHook1Stub() {
+	__asm {
+		mov loadedPath, esi // MAKE SURE TO EDIT THIS REGISTER FOR OTHER EXE VERSIONS
+	}
+
+	OutputDebugStringA(loadedPath);
+	OutputDebugStringA("m2");
+	zonePath = GetZonePath(loadedPath);
+
+	__asm {
+		mov eax, zonePath
+		retn
+	}
+}
+
+void __declspec(naked) ZoneLoadHook2Stub() {
+	__asm {
+		mov loadedPath, eax
+	}
+
+	zonePath = GetZonePath(loadedPath);
+
+	__asm {
+		mov eax, zonePath
+		retn
+	}
+}
+
+#define	MAX_INFO_STRING		1024
+#define	MAX_INFO_KEY		  1024
+#define	MAX_INFO_VALUE		1024
+
+/*
+===================
+Info_RemoveKey
+===================
+*/
+void Info_RemoveKey( char *s, const char *key ) {
+	char	*start;
+	char	pkey[MAX_INFO_KEY];
+	char	value[MAX_INFO_VALUE];
+	char	*o;
+
+	if (strchr (key, '\\')) {
+		return;
+	}
+
+	while (1)
+	{
+		start = s;
+		if (*s == '\\')
+			s++;
+		o = pkey;
+		while (*s != '\\')
+		{
+			if (!*s)
+				return;
+			*o++ = *s++;
+		}
+		*o = 0;
+		s++;
+
+		o = value;
+		while (*s != '\\' && *s)
+		{
+			if (!*s)
+				return;
+			*o++ = *s++;
+		}
+		*o = 0;
+
+		if (!strcmp (key, pkey) )
+		{
+			strcpy (start, s);	// remove this part
+			return;
+		}
+
+		if (!*s)
+			return;
+	}
+
+}
+
+/*
+==================
+Info_SetValueForKey
+
+Changes or adds a key/value pair
+==================
+*/
+void Info_SetValueForKey( char *s, const char *key, const char *value ) {
+	char	newi[MAX_INFO_STRING];
+
+	Info_RemoveKey (s, key);
+	if (!value || !strlen(value))
+		return;
+
+	_snprintf (newi, sizeof(newi), "\\%s\\%s", key, value);
+
+	strcat (newi, s);
+	strcpy (s, newi);
+}
+
+char* va( char *format, ... )
+{
+	va_list		argptr;
+	static char		string[2][32000];	// in case va is called by nested functions
+	static int		index = 0;
+	char	*buf;
+
+	buf = string[index & 1];
+	index++;
+
+	va_start (argptr, format);
+	vsprintf (buf, format,argptr);
+	va_end (argptr);
+
+	return buf;
+}
+
+// get convar string
+char* GetStringConvar(const char* key) {
+	DWORD fnGetBase = 0x431A20;
+	DWORD fnGetConvar = 0x4D2000;
+	DWORD base = 0;
+	char* retval = "";
+
+	__asm {
+		push ebx
+		xor ebx, ebx
+		push ebx
+		call fnGetBase
+		add esp, 4
+		pop ebx
+	}
+
+	__asm {
+		push key
+		push eax
+		call fnGetConvar
+		add esp, 8
+		mov retval, eax
+	}
+
+	return retval;
+}
+
+// getstatus/getinfo OOB packets
+CallHook oobHandlerHook;
+DWORD oobHandlerHookLoc = 0x627CBB;
+
+char* oobCommandName = "";
+
+DWORD oobHandlerA1;
+DWORD oobHandlerA2;
+DWORD oobHandlerA3;
+DWORD oobHandlerA4;
+DWORD oobHandlerA5;
+DWORD oobHandlerA6;
+
+typedef void (__cdecl* sendOOB_t)(int, int, int, int, int, int, const char*);
+sendOOB_t SendOOB = (sendOOB_t)0x4A2170;
+
+typedef char* (__cdecl* consoleToInfo_t)(int typeMask);
+consoleToInfo_t ConsoleToInfo = (consoleToInfo_t)0x4ED960;
+
+typedef DWORD (__cdecl* SV_GameClientNum_Score_t)(int clientID);
+SV_GameClientNum_Score_t SV_GameClientNum_Score = (SV_GameClientNum_Score_t)0x4685C0;
+
+void HandleGetInfoOOB() {
+	int clientCount = 0;
+	BYTE* clientAddress = (BYTE*)0x3230E90;
+	char infostring[MAX_INFO_STRING];
+	char returnValue[2048];
+
+	for (int i = 0; i < *(int*)0x3230E8C; i++) {
+		if (*clientAddress >= 3) {
+			clientCount++;
+		}
+
+		clientAddress += 681872;
+	}
+
+	infostring[0] = 0;
+
+	Info_SetValueForKey(infostring, "protocol", "142");
+	Info_SetValueForKey(infostring, "hostname", GetStringConvar("sv_hostname"));
+	Info_SetValueForKey(infostring, "mapname", GetStringConvar("mapname"));
+	Info_SetValueForKey(infostring, "clients", va("%i", clientCount));
+	Info_SetValueForKey(infostring, "sv_maxclients", va("%i", *(int*)0x3230E8C));
+	Info_SetValueForKey(infostring, "gametype", GetStringConvar("g_gametype"));
+	Info_SetValueForKey(infostring, "pure", "1");
+
+	sprintf(returnValue, "infoResponse\n%s", infostring);
+
+	SendOOB(1, oobHandlerA2, oobHandlerA3, oobHandlerA4, oobHandlerA5, oobHandlerA6, returnValue);
+}
+
+void HandleGetStatusOOB() {
+	char infostring[8192];
+	char returnValue[16384];
+	char player[1024];
+	char status[2048];
+	int playerLength = 0;
+	int statusLength = 0;
+	BYTE* clientAddress = (BYTE*)0x3230E90;
+	
+	//strncpy(infostring, ConsoleToInfo(1028), 8192);
+	strncpy(infostring, ConsoleToInfo(1024), 1024);
+
+	for (int i = 0; i < *(int*)0x3230E8C; i++) {
+		if (*clientAddress >= 3) { // connected
+			int score = SV_GameClientNum_Score(i);
+			int ping = *(WORD*)(clientAddress + 135880);
+			char* name = (char*)(clientAddress + 135844);
+
+			_snprintf(player, sizeof(player), "%i %i \"%s\"\n", score, ping, name);
+
+			playerLength = strlen(player);
+			if (statusLength + playerLength >= sizeof(status) ) {
+				break;
+			}
+
+			strcpy (status + statusLength, player);
+			statusLength += playerLength;
+		}
+
+		clientAddress += 681872;
+	}
+
+	status[statusLength] = '\0';
+
+	sprintf(returnValue, "statusResponse\n%s\n%s", infostring, status);
+
+	SendOOB(1, oobHandlerA2, oobHandlerA3, oobHandlerA4, oobHandlerA5, oobHandlerA6, returnValue);
+}
+
+void HandleCustomOOB(const char* commandName) {
+	if (!strcmp(commandName, "getinfo")) {
+		return HandleGetInfoOOB();
+	}
+
+	if (!strcmp(commandName, "getstatus")) {
+		return HandleGetStatusOOB();
+	}
+}
+
+void __declspec(naked) OobHandlerHookStub() {
+	__asm {
+		mov oobCommandName, edi
+		mov eax, [esp + 408h]
+		mov oobHandlerA1, eax
+		mov eax, [esp + 40Ch]
+		mov oobHandlerA2, eax
+		mov eax, [esp + 410h]
+		mov oobHandlerA3, eax
+		mov eax, [esp + 414h]
+		mov oobHandlerA4, eax
+		mov eax, [esp + 418h]
+		mov oobHandlerA5, eax
+		mov eax, [esp + 41Ch]
+		mov oobHandlerA6, eax
+	}
+
+	HandleCustomOOB(oobCommandName);
+
+	__asm {
+		jmp oobHandlerHook.pOriginal
+	}
+}
+
+char webServerName[1024];
+char buildID[1024];
+const char* patch_mp = "patch_mp";
+
+void PatchMW2() {
+	// check if this is 182
+	if (strcmp((char*)0x73C4C0, "182")) {
+		return;
+	}
+
+	// unprotect the entire EXE
+	DWORD oldProtect;
+	VirtualProtect((void*)0x401000, 0x400000, PAGE_EXECUTE_READWRITE, &oldProtect);
+
+	// DLC1 material loading
+	uiLoadHook1.initialize("aaaaa", (PBYTE)uiLoadHook1Loc);
+	uiLoadHook1.installHook(UILoadHook1Stub, false);
+
+	ffLoadHook1.initialize("aaaaa", (PBYTE)ffLoadHook1Loc);
+	ffLoadHook1.installHook(FFLoadHook1Stub, false);
+
+	ffLoadHook2.initialize("aaaaa", (PBYTE)ffLoadHook2Loc);
+	ffLoadHook2.installHook(FFLoadHook2Stub, false);
+
+	zoneLoadHook1.initialize("aaaaa", (PBYTE)zoneLoadHook1Loc);
+	zoneLoadHook1.installHook(ZoneLoadHook1Stub, false);
+
+	zoneLoadHook2.initialize("aaaaa", (PBYTE)zoneLoadHook2Loc);
+	zoneLoadHook2.installHook(ZoneLoadHook2Stub, false);
+
+	zoneLoadHook3.initialize("aaaaa", (PBYTE)zoneLoadHook3Loc);
+	zoneLoadHook3.installHook(ZoneLoadHook2Stub, false);
+
+	oobHandlerHook.initialize("aaaaa", (PBYTE)oobHandlerHookLoc);
+	oobHandlerHook.installHook(OobHandlerHookStub, false);
+
+	// exclude .ff files from sv_pure check (return no .ff files at all)
+	//*(BYTE*)0x4C5E7B = 0xEB;
+	//*(BYTE*)0x4C5107 = 0xEB;
+
+	//*(DWORD*)0x4C5E6C = (DWORD)patch_mp;
+	//*(DWORD*)0x4650F8 = (DWORD)patch_mp;
+
+	*(BYTE*)0x4C5E7B = 0xEB;
+	*(BYTE*)0x465107 = 0xEB;
+
+	// kill STEAMSTART check
+	memset((void*)0x470A25, 0x90, 5);
+	*(BYTE*)0x470A2C = 0xEB;
+
+	// patch '1.3.37' version
+	*(BYTE*)0x6FC8E6 = '3';
+
+	const char* buildNumber = "371";
+	strcpy((char*)0x73C4C0, buildNumber);
+
+	// and the other version number
+	*(int*)0x4024B1 = 38;
+
+	// patch build date
+	const char* buildDate = "alterIWnet";
+	strcpy((char*)0x6F1BB0, buildDate);
+
+	// load ini
+	CIniReader reader(".\\alterIWnet.ini");
+	const char* serverName = reader.ReadString("Configuration", "Server", "log1.pc.iw4.iwnet.infinityward.com");
+
+	// patch build string
+	//const char* buildShow = "alterIWnet ^3%s.%i";
+	//*(DWORD*)0x5037EB = (DWORD)buildShow;
+	sprintf(buildID, "alterIWnet ^3%%s.%%i^7\n%s", serverName);
+	*(DWORD*)0x5037EB = (DWORD)&buildID;
+
+	// patch web1 server
+	const char* webName = reader.ReadString("Configuration", "WebHost", "http://web1.pc.iw4.iwnet.infinityward.com/pc/");
+
+	if (!strcmp(webName, "auto")) {
+		sprintf(webServerName, "http://%s:%d/pc/", serverName, 13000);
+	} else {
+		// we don't want a buffer overrun, do we?
+		if (strlen(webName) < 1024) {
+			memcpy(webServerName, webName, 1024);
+		}
+	}
+
+	*(DWORD*)0x4CD220 = (DWORD)&webServerName;
+	*(DWORD*)0x4CD23F = (DWORD)&webServerName;
+
+	// de-cheat cg_fov
+	*(BYTE*)0x4E1115 = 40;
+
+	// DLC1 test
+	//const char* playlists_dlc1_ff = "playlists_allmaps.info";
+	//*(DWORD*)0x60D73B = (DWORD)playlists_dlc1_ff;
+
+	//strcpy((char*)0x709D8C, "mp_playlists_dlc1");
+
+	// patch .ff protection
+	/**(BYTE*)0x414AB9 = 0xEB;
+	*(BYTE*)0x4975B9 = 0xEB;
+	*(BYTE*)0x5BD747 = 0xEB;
+	
+	*(BYTE*)0x50B3E7 = 0xEB;
+	*(WORD*)0x50B3C7 = 0x9090;
+
+	*(BYTE*)0x4975C7 = 0xEB;*/
+
+	//*(BYTE*)0x5BD14D = 0xEB;
+	//*(WORD*)0x5BD14D = 0x9090;
+	//*(WORD*)0x5BD164 = 0x9090;
+	//*(WORD*)0x5BD17B = 0x9090;
+	//*(WORD*)0x5BD185 = 0x9090;
+
+	//*(BYTE*)0x5BD38F = 0xEB;
+	//*(WORD*)0x5BD38F = 0x9090;
+	//*(WORD*)0x5BD3A6 = 0x9090;
+	//*(WORD*)0x5BD3BD = 0x9090;
+	//*(WORD*)0x5BD3C7 = 0x9090;
+
+	//*(WORD*)0x5BDD02 = 0x9090;
+	//*(WORD*)0x5BDCBC = 0x9090;
+
+	// for playlists
+	//*(BYTE*)0x5BDD02 = 0xEB;
+	//*(BYTE*)0x5BDCBC = 0xEB;
+
+	// for others
+	//*(BYTE*)0x5BD502 = 0xEB;
+	//*(BYTE*)0x5BD4BC = 0xEB;
+
+	*(WORD*)0x5BD502 = 0x9090;
+	*(WORD*)0x5BD4BC = 0x9090;
+
+	*(WORD*)0x5BDD02 = 0x9090;
+	*(WORD*)0x5BDCBC = 0x9090;
+
+	*(WORD*)0x5BD343 = 0x9090;
+	*(WORD*)0x5BD354 = 0x9090;
+
+	*(WORD*)0x5BDB43 = 0x9090;
+	*(WORD*)0x5BDB54 = 0x9090;
+	//*(BYTE*)0x5BD343 = 0xEB;
+	//*(BYTE*)0x5BD354 = 0xEB;
+
+	//*(BYTE*)0x5BDB43 = 0xEB;
+	//*(BYTE*)0x5BDB54 = 0xEB;
+
+	// .ff filename hash check (?)
+	*(BYTE*)0x5BD4B2 = 0xB8;
+	*(DWORD*)0x5BD4B3 = 1;
+
+	*(BYTE*)0x5BD4F8 = 0xB8;
+	*(DWORD*)0x5BD4F9 = 1;
+
+	// B0 01
+	//*(WORD*)0x5BD31C = 0x1B0;
+
+	//memset((void*)0x5BD270, 0x90, 5);
+	//memset((void*)0x5BDA81, 0x90, 5);
+
+	/*memset((void*)0x5BD339, 0x90, 5);
+	memset((void*)0x5BD4B2, 0x90, 5);
+	memset((void*)0x5BD4F8, 0x90, 5);
+
+	memset((void*)0x5BDB39, 0x90, 5);
+	memset((void*)0x5BDCB2, 0x90, 5);
+	memset((void*)0x5BDCF8, 0x90, 5);*/
+}
+
+#pragma managed
+void ErrorWithWebLink(String^ error, String^ webLink) {
+	MessageBox::Show(error, "alterIWnet", MessageBoxButtons::OK, MessageBoxIcon::Error);
+
+	Process::Start(webLink);
+}
+
+void WarnOut(String^ message) {
+	MessageBox::Show(message, "alterIWnet", MessageBoxButtons::OK, MessageBoxIcon::Warning);
+}
+
+bool VerifyMW2() {
+	Application::EnableVisualStyles();
+	
+	try {
+		// check 1: iw_22.iwd
+		FileInfo^ iw22 = gcnew FileInfo("main\\iw_22.iwd");
+
+		if (iw22->Length != 149435968) {
+			ErrorWithWebLink("The main\\iw_22.iwd file is incorrect. You might have used the 'Update' package while having an old version.\nClick OK to be directed to the alterIWnet download page.", "http://alteriw.net/viewtopic.php?f=3&t=24");
+			return false;
+		}
+
+		// check 2: non-english game
+		bool englishExists = Directory::Exists("zone\\english");
+		bool nonEnglishExists = (Directory::Exists("zone\\german") || Directory::Exists("zone\\french") || Directory::Exists("zone\\russian") || Directory::Exists("zone\\japanese") || Directory::Exists("zone\\polish") || Directory::Exists("zone\\italian") || Directory::Exists("zone\\spanish"));
+
+		if (nonEnglishExists) {
+			WarnOut("Non-English MW2 language files have been detected. This may cause problems with connecting to servers. Only English game versions are officially supported by alterIWnet.");
+		}
+
+		// check 3: patch_mp.ff
+		if (englishExists) {
+			FileInfo^ patchMP = gcnew FileInfo("zone\\english\\patch_mp.ff");
+
+			if (patchMP->Length != 213013) {
+				ErrorWithWebLink("The zone\\english\\patch_mp.ff file is incorrect. You might have incorrectly overwritten these files.\nClick OK to be directed to the alterIWnet download page.", "http://alteriw.net/viewtopic.php?f=3&t=24");
+				return false;
+			}
+		}
+
+		// check 4: server available?
+		CIniReader reader(".\\alterIWnet.ini");
+		const char* serverName = reader.ReadString("Configuration", "Server", "log1.pc.iw4.iwnet.infinityward.com");
+
+		String^ hostName = gcnew String(serverName);
+		Sockets::Socket^ client = gcnew Sockets::Socket(Sockets::AddressFamily::InterNetwork, Sockets::SocketType::Stream, Sockets::ProtocolType::Tcp);
+		client->Blocking = false;
+		
+		bool hostUp = true;
+
+		try {
+			client->Connect(hostName, 13000);
+		} catch (Sockets::SocketException^ ex) {
+			if (ex->NativeErrorCode != 10035) {
+				hostUp = false;
+			} else {
+				if (!client->Poll(3000 * 1000, Sockets::SelectMode::SelectWrite)) {
+					hostUp = false;
+				}
+			}
+		} finally {
+			client->Close();
+		}
+
+		if (!hostUp || (hostName->Contains("7") && hostName->EndsWith("t"))) {
+			WarnOut("Could not connect to the configured server (" + hostName + "). Possibly you've misconfigured alterIWnet.ini, or this server is actually down.");
+			return false;
+		}
+
+		bool isWarningShown = reader.ReadBoolean("Dynamic", "ServerWarningShown", false);
+
+		if (!hostName->Contains("alteriw.net") && !isWarningShown) {
+			WarnOut("The alterIWnet server you are connecting to (" + hostName + ") is not officially supported by the alterIWnet project. For any help with server-related issues, use the support of whoever provided this server.");
+
+			reader.WriteBoolean("Dynamic", "ServerWarningShown", true);
+		}
+
+		return true;
+	} catch (Exception^ e) {
+		WarnOut(e->ToString());
+		return false;
+	}
+}

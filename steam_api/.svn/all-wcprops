@@ -1,0 +1,95 @@
+K 25
+svn:wc:ra_dav:version-url
+V 41
+/svn/!svn/ver/4/trunk/steam_api/steam_api
+END
+stdafx.h
+K 25
+svn:wc:ra_dav:version-url
+V 50
+/svn/!svn/ver/4/trunk/steam_api/steam_api/stdafx.h
+END
+Hooking.cpp
+K 25
+svn:wc:ra_dav:version-url
+V 53
+/svn/!svn/ver/4/trunk/steam_api/steam_api/Hooking.cpp
+END
+apptools.cpp
+K 25
+svn:wc:ra_dav:version-url
+V 54
+/svn/!svn/ver/4/trunk/steam_api/steam_api/apptools.cpp
+END
+steam_api.cpp
+K 25
+svn:wc:ra_dav:version-url
+V 55
+/svn/!svn/ver/4/trunk/steam_api/steam_api/steam_api.cpp
+END
+IniReader.cpp
+K 25
+svn:wc:ra_dav:version-url
+V 55
+/svn/!svn/ver/4/trunk/steam_api/steam_api/IniReader.cpp
+END
+Hooking.h
+K 25
+svn:wc:ra_dav:version-url
+V 51
+/svn/!svn/ver/4/trunk/steam_api/steam_api/Hooking.h
+END
+apptools.h
+K 25
+svn:wc:ra_dav:version-url
+V 52
+/svn/!svn/ver/4/trunk/steam_api/steam_api/apptools.h
+END
+steam_api.vcproj.FALLARBOR.Bas.user
+K 25
+svn:wc:ra_dav:version-url
+V 77
+/svn/!svn/ver/4/trunk/steam_api/steam_api/steam_api.vcproj.FALLARBOR.Bas.user
+END
+IniReader.h
+K 25
+svn:wc:ra_dav:version-url
+V 53
+/svn/!svn/ver/4/trunk/steam_api/steam_api/IniReader.h
+END
+callbacks.cpp
+K 25
+svn:wc:ra_dav:version-url
+V 55
+/svn/!svn/ver/4/trunk/steam_api/steam_api/callbacks.cpp
+END
+steam_api.vcproj
+K 25
+svn:wc:ra_dav:version-url
+V 58
+/svn/!svn/ver/4/trunk/steam_api/steam_api/steam_api.vcproj
+END
+patch_mw2.cpp
+K 25
+svn:wc:ra_dav:version-url
+V 55
+/svn/!svn/ver/4/trunk/steam_api/steam_api/patch_mw2.cpp
+END
+callbacks.h
+K 25
+svn:wc:ra_dav:version-url
+V 53
+/svn/!svn/ver/4/trunk/steam_api/steam_api/callbacks.h
+END
+stdafx.cpp
+K 25
+svn:wc:ra_dav:version-url
+V 52
+/svn/!svn/ver/4/trunk/steam_api/steam_api/stdafx.cpp
+END
+SteamAPIHook.h
+K 25
+svn:wc:ra_dav:version-url
+V 56
+/svn/!svn/ver/4/trunk/steam_api/steam_api/SteamAPIHook.h
+END

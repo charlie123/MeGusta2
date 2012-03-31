@@ -1,0 +1,499 @@
+  System.Xml.Linq.resources - Embedded, ContainedInManifestFile, 
+Assembly System.Xml.Linq, Version=3.5.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089: 
+	hash=SHA1, flags=PublicKey
+Assembly System, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089: 
+	hash=SHA1, flags=None
+Assembly mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089: 
+	hash=SHA1, flags=None
+Assembly System.Xml, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089: 
+	hash=SHA1, flags=None
+Assembly System.Core, Version=3.5.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089: 
+	hash=SHA1, flags=None
+Class System.Xml.Linq.XName: AutoLayout, AnsiClass, Class, Public, Sealed, Serializable, BeforeFieldInit
+  Interfaces:
+    System.IEquatable`1[System.Xml.Linq.XName]
+    System.Runtime.Serialization.ISerializable
+  Properties:
+    System.String LocalName 'get ' : 
+    System.Xml.Linq.XNamespace Namespace 'get ' : 
+    System.String NamespaceName 'get ' : 
+  Methods:
+    get_LocalName(): PrivateScope, Public, HideBySig, SpecialName
+    get_Namespace(): PrivateScope, Public, HideBySig, SpecialName
+    get_NamespaceName(): PrivateScope, Public, HideBySig, SpecialName
+    ToString(): PrivateScope, Public, Virtual, HideBySig
+    Get(String): PrivateScope, Public, Static, HideBySig
+    Get(String, String): PrivateScope, Public, Static, HideBySig
+    op_Implicit(String): PrivateScope, Public, Static, HideBySig, SpecialName
+    Equals(Object): PrivateScope, Public, Virtual, HideBySig
+    GetHashCode(): PrivateScope, Public, Virtual, HideBySig
+    op_Equality(XName, XName): PrivateScope, Public, Static, HideBySig, SpecialName
+    op_Inequality(XName, XName): PrivateScope, Public, Static, HideBySig, SpecialName
+Class System.Xml.Linq.XNamespace: AutoLayout, AnsiClass, Class, Public, Sealed, BeforeFieldInit
+  Properties:
+    System.String NamespaceName 'get ' : 
+    System.Xml.Linq.XNamespace None 'get ' : 
+    System.Xml.Linq.XNamespace Xml 'get ' : 
+    System.Xml.Linq.XNamespace Xmlns 'get ' : 
+  Methods:
+    get_NamespaceName(): PrivateScope, Public, HideBySig, SpecialName
+    GetName(String): PrivateScope, Public, HideBySig
+    ToString(): PrivateScope, Public, Virtual, HideBySig
+    get_None(): PrivateScope, Public, Static, HideBySig, SpecialName
+    get_Xml(): PrivateScope, Public, Static, HideBySig, SpecialName
+    get_Xmlns(): PrivateScope, Public, Static, HideBySig, SpecialName
+    Get(String): PrivateScope, Public, Static, HideBySig
+    op_Implicit(String): PrivateScope, Public, Static, HideBySig, SpecialName
+    op_Addition(XNamespace, String): PrivateScope, Public, Static, HideBySig, SpecialName
+    Equals(Object): PrivateScope, Public, Virtual, HideBySig
+    GetHashCode(): PrivateScope, Public, Virtual, HideBySig
+    op_Equality(XNamespace, XNamespace): PrivateScope, Public, Static, HideBySig, SpecialName
+    op_Inequality(XNamespace, XNamespace): PrivateScope, Public, Static, HideBySig, SpecialName
+Class System.Xml.Linq.XObject: AutoLayout, AnsiClass, Class, Public, Abstract, BeforeFieldInit
+  Interfaces:
+    System.Xml.IXmlLineInfo
+  Properties:
+    System.String BaseUri 'get ' : 
+    System.Xml.Linq.XDocument Document 'get ' : 
+    System.Xml.XmlNodeType NodeType 'get ' : 
+    System.Xml.Linq.XElement Parent 'get ' : 
+  Events:
+    System.EventHandler`1[System.Xml.Linq.XObjectChangeEventArgs] Changed: 
+    System.EventHandler`1[System.Xml.Linq.XObjectChangeEventArgs] Changing: 
+  Methods:
+    get_BaseUri(): PrivateScope, Public, HideBySig, SpecialName
+    get_Document(): PrivateScope, Public, HideBySig, SpecialName
+    get_NodeType(): PrivateScope, Public, Virtual, HideBySig, VtableLayoutMask, Abstract, SpecialName
+    get_Parent(): PrivateScope, Public, HideBySig, SpecialName
+    AddAnnotation(Object): PrivateScope, Public, HideBySig
+    Annotation(Type): PrivateScope, Public, HideBySig
+    Annotation(): PrivateScope, Public, HideBySig
+    Annotations(Type): PrivateScope, Public, HideBySig
+    Annotations(): PrivateScope, Public, HideBySig
+    RemoveAnnotations(Type): PrivateScope, Public, HideBySig
+    RemoveAnnotations(): PrivateScope, Public, HideBySig
+    add_Changed(EventHandler`1): PrivateScope, Public, HideBySig, SpecialName
+    remove_Changed(EventHandler`1): PrivateScope, Public, HideBySig, SpecialName
+    add_Changing(EventHandler`1): PrivateScope, Public, HideBySig, SpecialName
+    remove_Changing(EventHandler`1): PrivateScope, Public, HideBySig, SpecialName
+Struct System.Xml.Linq.XObjectChange: AutoLayout, AnsiClass, Class, Public, Sealed
+  :System.Enum
+  Fields:
+    Int32 value__ : Public, SpecialName, RTSpecialName
+    System.Xml.Linq.XObjectChange Add = 0 : Public, Static, Literal, HasDefault
+    System.Xml.Linq.XObjectChange Remove = 1 : Public, Static, Literal, HasDefault
+    System.Xml.Linq.XObjectChange Name = 2 : Public, Static, Literal, HasDefault
+    System.Xml.Linq.XObjectChange Value = 3 : Public, Static, Literal, HasDefault
+Class System.Xml.Linq.XObjectChangeEventArgs: AutoLayout, AnsiClass, Class, Public, BeforeFieldInit
+  :System.EventArgs
+    Void .ctor(System.Xml.Linq.XObjectChange): PrivateScope, Public, HideBySig, SpecialName, RTSpecialName
+  Fields:
+    System.Xml.Linq.XObjectChangeEventArgs Add : Public, Static, InitOnly
+    System.Xml.Linq.XObjectChangeEventArgs Remove : Public, Static, InitOnly
+    System.Xml.Linq.XObjectChangeEventArgs Name : Public, Static, InitOnly
+    System.Xml.Linq.XObjectChangeEventArgs Value : Public, Static, InitOnly
+  Properties:
+    System.Xml.Linq.XObjectChange ObjectChange 'get ' : 
+  Methods:
+    get_ObjectChange(): PrivateScope, Public, HideBySig, SpecialName
+Class System.Xml.Linq.XNode: AutoLayout, AnsiClass, Class, Public, Abstract, BeforeFieldInit
+  :System.Xml.Linq.XObject
+  Properties:
+    System.Xml.Linq.XNode NextNode 'get ' : 
+    System.Xml.Linq.XNode PreviousNode 'get ' : 
+    System.Xml.Linq.XNodeDocumentOrderComparer DocumentOrderComparer 'get ' : 
+    System.Xml.Linq.XNodeEqualityComparer EqualityComparer 'get ' : 
+  Methods:
+    get_NextNode(): PrivateScope, Public, HideBySig, SpecialName
+    get_PreviousNode(): PrivateScope, Public, HideBySig, SpecialName
+    get_DocumentOrderComparer(): PrivateScope, Public, Static, HideBySig, SpecialName
+    get_EqualityComparer(): PrivateScope, Public, Static, HideBySig, SpecialName
+    AddAfterSelf(Object): PrivateScope, Public, HideBySig
+    AddAfterSelf(Object[]): PrivateScope, Public, HideBySig
+    AddBeforeSelf(Object): PrivateScope, Public, HideBySig
+    AddBeforeSelf(Object[]): PrivateScope, Public, HideBySig
+    Ancestors(): PrivateScope, Public, HideBySig
+    Ancestors(XName): PrivateScope, Public, HideBySig
+    CompareDocumentOrder(XNode, XNode): PrivateScope, Public, Static, HideBySig
+    CreateReader(): PrivateScope, Public, HideBySig
+    NodesAfterSelf(): PrivateScope, Public, HideBySig
+    NodesBeforeSelf(): PrivateScope, Public, HideBySig
+    ElementsAfterSelf(): PrivateScope, Public, HideBySig
+    ElementsAfterSelf(XName): PrivateScope, Public, HideBySig
+    ElementsBeforeSelf(): PrivateScope, Public, HideBySig
+    ElementsBeforeSelf(XName): PrivateScope, Public, HideBySig
+    IsAfter(XNode): PrivateScope, Public, HideBySig
+    IsBefore(XNode): PrivateScope, Public, HideBySig
+    ReadFrom(XmlReader): PrivateScope, Public, Static, HideBySig
+    Remove(): PrivateScope, Public, HideBySig
+    ReplaceWith(Object): PrivateScope, Public, HideBySig
+    ReplaceWith(Object[]): PrivateScope, Public, HideBySig
+    ToString(): PrivateScope, Public, Virtual, HideBySig
+    ToString(SaveOptions): PrivateScope, Public, HideBySig
+    DeepEquals(XNode, XNode): PrivateScope, Public, Static, HideBySig
+    WriteTo(XmlWriter): PrivateScope, Public, Virtual, HideBySig, VtableLayoutMask, Abstract
+Class System.Xml.Linq.XNodeDocumentOrderComparer: AutoLayout, AnsiClass, Class, Public, Sealed, BeforeFieldInit
+    Void .ctor(): PrivateScope, Public, HideBySig, SpecialName, RTSpecialName
+  Interfaces:
+    System.Collections.IComparer
+    System.Collections.Generic.IComparer`1[System.Xml.Linq.XNode]
+  Methods:
+    Compare(XNode, XNode): PrivateScope, Public, Final, Virtual, HideBySig, VtableLayoutMask
+Class System.Xml.Linq.XNodeEqualityComparer: AutoLayout, AnsiClass, Class, Public, Sealed, BeforeFieldInit
+    Void .ctor(): PrivateScope, Public, HideBySig, SpecialName, RTSpecialName
+  Interfaces:
+    System.Collections.IEqualityComparer
+    System.Collections.Generic.IEqualityComparer`1[System.Xml.Linq.XNode]
+  Methods:
+    Equals(XNode, XNode): PrivateScope, Public, Final, Virtual, HideBySig, VtableLayoutMask
+    GetHashCode(XNode): PrivateScope, Public, Final, Virtual, HideBySig, VtableLayoutMask
+Class System.Xml.Linq.XText: AutoLayout, AnsiClass, Class, Public, BeforeFieldInit
+  :System.Xml.Linq.XNode
+    Void .ctor(System.String): PrivateScope, Public, HideBySig, SpecialName, RTSpecialName
+    Void .ctor(System.Xml.Linq.XText): PrivateScope, Public, HideBySig, SpecialName, RTSpecialName
+  Properties:
+    System.Xml.XmlNodeType NodeType 'get ' : 
+    System.String Value 'get set' : 
+  Methods:
+    get_NodeType(): PrivateScope, Public, Virtual, HideBySig, SpecialName
+    get_Value(): PrivateScope, Public, HideBySig, SpecialName
+    set_Value(String): PrivateScope, Public, HideBySig, SpecialName
+    WriteTo(XmlWriter): PrivateScope, Public, Virtual, HideBySig
+Class System.Xml.Linq.XCData: AutoLayout, AnsiClass, Class, Public, BeforeFieldInit
+  :System.Xml.Linq.XText
+    Void .ctor(System.String): PrivateScope, Public, HideBySig, SpecialName, RTSpecialName
+    Void .ctor(System.Xml.Linq.XCData): PrivateScope, Public, HideBySig, SpecialName, RTSpecialName
+  Properties:
+    System.Xml.XmlNodeType NodeType 'get ' : 
+  Methods:
+    get_NodeType(): PrivateScope, Public, Virtual, HideBySig, SpecialName
+    WriteTo(XmlWriter): PrivateScope, Public, Virtual, HideBySig
+Class System.Xml.Linq.XContainer: AutoLayout, AnsiClass, Class, Public, Abstract, BeforeFieldInit
+  :System.Xml.Linq.XNode
+  Properties:
+    System.Xml.Linq.XNode FirstNode 'get ' : 
+    System.Xml.Linq.XNode LastNode 'get ' : 
+  Methods:
+    get_FirstNode(): PrivateScope, Public, HideBySig, SpecialName
+    get_LastNode(): PrivateScope, Public, HideBySig, SpecialName
+    Add(Object): PrivateScope, Public, HideBySig
+    Add(Object[]): PrivateScope, Public, HideBySig
+    AddFirst(Object): PrivateScope, Public, HideBySig
+    AddFirst(Object[]): PrivateScope, Public, HideBySig
+    CreateWriter(): PrivateScope, Public, HideBySig
+    DescendantNodes(): PrivateScope, Public, HideBySig
+    Descendants(): PrivateScope, Public, HideBySig
+    Descendants(XName): PrivateScope, Public, HideBySig
+    Element(XName): PrivateScope, Public, HideBySig
+    Elements(): PrivateScope, Public, HideBySig
+    Elements(XName): PrivateScope, Public, HideBySig
+    Nodes(): PrivateScope, Public, HideBySig
+    RemoveNodes(): PrivateScope, Public, HideBySig
+    ReplaceNodes(Object): PrivateScope, Public, HideBySig
+    ReplaceNodes(Object[]): PrivateScope, Public, HideBySig
+Class System.Xml.Linq.XElement: AutoLayout, AnsiClass, Class, Public, BeforeFieldInit
+  :System.Xml.Linq.XContainer
+    Void .ctor(System.Xml.Linq.XName): PrivateScope, Public, HideBySig, SpecialName, RTSpecialName
+    Void .ctor(System.Xml.Linq.XName, System.Object): PrivateScope, Public, HideBySig, SpecialName, RTSpecialName
+    Void .ctor(System.Xml.Linq.XName, System.Object[]): PrivateScope, Public, HideBySig, SpecialName, RTSpecialName
+    Void .ctor(System.Xml.Linq.XElement): PrivateScope, Public, HideBySig, SpecialName, RTSpecialName
+    Void .ctor(System.Xml.Linq.XStreamingElement): PrivateScope, Public, HideBySig, SpecialName, RTSpecialName
+  Interfaces:
+    System.Xml.Serialization.IXmlSerializable
+  Properties:
+    System.Collections.Generic.IEnumerable`1[System.Xml.Linq.XElement] EmptySequence 'get ' : 
+    System.Xml.Linq.XAttribute FirstAttribute 'get ' : 
+    Boolean HasAttributes 'get ' : 
+    Boolean HasElements 'get ' : 
+    Boolean IsEmpty 'get ' : 
+    System.Xml.Linq.XAttribute LastAttribute 'get ' : 
+    System.Xml.Linq.XName Name 'get set' : 
+    System.Xml.XmlNodeType NodeType 'get ' : 
+    System.String Value 'get set' : 
+  Methods:
+    get_EmptySequence(): PrivateScope, Public, Static, HideBySig, SpecialName
+    get_FirstAttribute(): PrivateScope, Public, HideBySig, SpecialName
+    get_HasAttributes(): PrivateScope, Public, HideBySig, SpecialName
+    get_HasElements(): PrivateScope, Public, HideBySig, SpecialName
+    get_IsEmpty(): PrivateScope, Public, HideBySig, SpecialName
+    get_LastAttribute(): PrivateScope, Public, HideBySig, SpecialName
+    get_Name(): PrivateScope, Public, HideBySig, SpecialName
+    set_Name(XName): PrivateScope, Public, HideBySig, SpecialName
+    get_NodeType(): PrivateScope, Public, Virtual, HideBySig, SpecialName
+    get_Value(): PrivateScope, Public, HideBySig, SpecialName
+    set_Value(String): PrivateScope, Public, HideBySig, SpecialName
+    AncestorsAndSelf(): PrivateScope, Public, HideBySig
+    AncestorsAndSelf(XName): PrivateScope, Public, HideBySig
+    Attribute(XName): PrivateScope, Public, HideBySig
+    Attributes(): PrivateScope, Public, HideBySig
+    Attributes(XName): PrivateScope, Public, HideBySig
+    DescendantNodesAndSelf(): PrivateScope, Public, HideBySig
+    DescendantsAndSelf(): PrivateScope, Public, HideBySig
+    DescendantsAndSelf(XName): PrivateScope, Public, HideBySig
+    GetDefaultNamespace(): PrivateScope, Public, HideBySig
+    GetNamespaceOfPrefix(String): PrivateScope, Public, HideBySig
+    GetPrefixOfNamespace(XNamespace): PrivateScope, Public, HideBySig
+    Load(String): PrivateScope, Public, Static, HideBySig
+    Load(String, LoadOptions): PrivateScope, Public, Static, HideBySig
+    Load(TextReader): PrivateScope, Public, Static, HideBySig
+    Load(TextReader, LoadOptions): PrivateScope, Public, Static, HideBySig
+    Load(XmlReader): PrivateScope, Public, Static, HideBySig
+    Load(XmlReader, LoadOptions): PrivateScope, Public, Static, HideBySig
+    Parse(String): PrivateScope, Public, Static, HideBySig
+    Parse(String, LoadOptions): PrivateScope, Public, Static, HideBySig
+    RemoveAll(): PrivateScope, Public, HideBySig
+    RemoveAttributes(): PrivateScope, Public, HideBySig
+    ReplaceAll(Object): PrivateScope, Public, HideBySig
+    ReplaceAll(Object[]): PrivateScope, Public, HideBySig
+    ReplaceAttributes(Object): PrivateScope, Public, HideBySig
+    ReplaceAttributes(Object[]): PrivateScope, Public, HideBySig
+    Save(String): PrivateScope, Public, HideBySig
+    Save(String, SaveOptions): PrivateScope, Public, HideBySig
+    Save(TextWriter): PrivateScope, Public, HideBySig
+    Save(TextWriter, SaveOptions): PrivateScope, Public, HideBySig
+    Save(XmlWriter): PrivateScope, Public, HideBySig
+    SetAttributeValue(XName, Object): PrivateScope, Public, HideBySig
+    SetElementValue(XName, Object): PrivateScope, Public, HideBySig
+    SetValue(Object): PrivateScope, Public, HideBySig
+    WriteTo(XmlWriter): PrivateScope, Public, Virtual, HideBySig
+    op_Explicit(XElement): PrivateScope, Public, Static, HideBySig, SpecialName
+    op_Explicit(XElement): PrivateScope, Public, Static, HideBySig, SpecialName
+    op_Explicit(XElement): PrivateScope, Public, Static, HideBySig, SpecialName
+    op_Explicit(XElement): PrivateScope, Public, Static, HideBySig, SpecialName
+    op_Explicit(XElement): PrivateScope, Public, Static, HideBySig, SpecialName
+    op_Explicit(XElement): PrivateScope, Public, Static, HideBySig, SpecialName
+    op_Explicit(XElement): PrivateScope, Public, Static, HideBySig, SpecialName
+    op_Explicit(XElement): PrivateScope, Public, Static, HideBySig, SpecialName
+    op_Explicit(XElement): PrivateScope, Public, Static, HideBySig, SpecialName
+    op_Explicit(XElement): PrivateScope, Public, Static, HideBySig, SpecialName
+    op_Explicit(XElement): PrivateScope, Public, Static, HideBySig, SpecialName
+    op_Explicit(XElement): PrivateScope, Public, Static, HideBySig, SpecialName
+    op_Explicit(XElement): PrivateScope, Public, Static, HideBySig, SpecialName
+    op_Explicit(XElement): PrivateScope, Public, Static, HideBySig, SpecialName
+    op_Explicit(XElement): PrivateScope, Public, Static, HideBySig, SpecialName
+    op_Explicit(XElement): PrivateScope, Public, Static, HideBySig, SpecialName
+    op_Explicit(XElement): PrivateScope, Public, Static, HideBySig, SpecialName
+    op_Explicit(XElement): PrivateScope, Public, Static, HideBySig, SpecialName
+    op_Explicit(XElement): PrivateScope, Public, Static, HideBySig, SpecialName
+    op_Explicit(XElement): PrivateScope, Public, Static, HideBySig, SpecialName
+    op_Explicit(XElement): PrivateScope, Public, Static, HideBySig, SpecialName
+    op_Explicit(XElement): PrivateScope, Public, Static, HideBySig, SpecialName
+    op_Explicit(XElement): PrivateScope, Public, Static, HideBySig, SpecialName
+    op_Explicit(XElement): PrivateScope, Public, Static, HideBySig, SpecialName
+    op_Explicit(XElement): PrivateScope, Public, Static, HideBySig, SpecialName
+Struct System.Xml.Linq.LoadOptions: AutoLayout, AnsiClass, Class, Public, Sealed
+  :System.Enum
+  Fields:
+    Int32 value__ : Public, SpecialName, RTSpecialName
+    System.Xml.Linq.LoadOptions None = 0 : Public, Static, Literal, HasDefault
+    System.Xml.Linq.LoadOptions PreserveWhitespace = 1 : Public, Static, Literal, HasDefault
+    System.Xml.Linq.LoadOptions SetBaseUri = 2 : Public, Static, Literal, HasDefault
+    System.Xml.Linq.LoadOptions SetLineInfo = 4 : Public, Static, Literal, HasDefault
+Struct System.Xml.Linq.SaveOptions: AutoLayout, AnsiClass, Class, Public, Sealed
+  :System.Enum
+  Fields:
+    Int32 value__ : Public, SpecialName, RTSpecialName
+    System.Xml.Linq.SaveOptions None = 0 : Public, Static, Literal, HasDefault
+    System.Xml.Linq.SaveOptions DisableFormatting = 1 : Public, Static, Literal, HasDefault
+Class System.Xml.Linq.XDocument: AutoLayout, AnsiClass, Class, Public, BeforeFieldInit
+  :System.Xml.Linq.XContainer
+    Void .ctor(): PrivateScope, Public, HideBySig, SpecialName, RTSpecialName
+    Void .ctor(System.Object[]): PrivateScope, Public, HideBySig, SpecialName, RTSpecialName
+    Void .ctor(System.Xml.Linq.XDeclaration, System.Object[]): PrivateScope, Public, HideBySig, SpecialName, RTSpecialName
+    Void .ctor(System.Xml.Linq.XDocument): PrivateScope, Public, HideBySig, SpecialName, RTSpecialName
+  Properties:
+    System.Xml.Linq.XDeclaration Declaration 'get set' : 
+    System.Xml.Linq.XDocumentType DocumentType 'get ' : 
+    System.Xml.XmlNodeType NodeType 'get ' : 
+    System.Xml.Linq.XElement Root 'get ' : 
+  Methods:
+    get_Declaration(): PrivateScope, Public, HideBySig, SpecialName
+    set_Declaration(XDeclaration): PrivateScope, Public, HideBySig, SpecialName
+    get_DocumentType(): PrivateScope, Public, HideBySig, SpecialName
+    get_NodeType(): PrivateScope, Public, Virtual, HideBySig, SpecialName
+    get_Root(): PrivateScope, Public, HideBySig, SpecialName
+    Load(String): PrivateScope, Public, Static, HideBySig
+    Load(String, LoadOptions): PrivateScope, Public, Static, HideBySig
+    Load(TextReader): PrivateScope, Public, Static, HideBySig
+    Load(TextReader, LoadOptions): PrivateScope, Public, Static, HideBySig
+    Load(XmlReader): PrivateScope, Public, Static, HideBySig
+    Load(XmlReader, LoadOptions): PrivateScope, Public, Static, HideBySig
+    Parse(String): PrivateScope, Public, Static, HideBySig
+    Parse(String, LoadOptions): PrivateScope, Public, Static, HideBySig
+    Save(String): PrivateScope, Public, HideBySig
+    Save(String, SaveOptions): PrivateScope, Public, HideBySig
+    Save(TextWriter): PrivateScope, Public, HideBySig
+    Save(TextWriter, SaveOptions): PrivateScope, Public, HideBySig
+    Save(XmlWriter): PrivateScope, Public, HideBySig
+    WriteTo(XmlWriter): PrivateScope, Public, Virtual, HideBySig
+Class System.Xml.Linq.XComment: AutoLayout, AnsiClass, Class, Public, BeforeFieldInit
+  :System.Xml.Linq.XNode
+    Void .ctor(System.String): PrivateScope, Public, HideBySig, SpecialName, RTSpecialName
+    Void .ctor(System.Xml.Linq.XComment): PrivateScope, Public, HideBySig, SpecialName, RTSpecialName
+  Properties:
+    System.Xml.XmlNodeType NodeType 'get ' : 
+    System.String Value 'get set' : 
+  Methods:
+    get_NodeType(): PrivateScope, Public, Virtual, HideBySig, SpecialName
+    get_Value(): PrivateScope, Public, HideBySig, SpecialName
+    set_Value(String): PrivateScope, Public, HideBySig, SpecialName
+    WriteTo(XmlWriter): PrivateScope, Public, Virtual, HideBySig
+Class System.Xml.Linq.XProcessingInstruction: AutoLayout, AnsiClass, Class, Public, BeforeFieldInit
+  :System.Xml.Linq.XNode
+    Void .ctor(System.String, System.String): PrivateScope, Public, HideBySig, SpecialName, RTSpecialName
+    Void .ctor(System.Xml.Linq.XProcessingInstruction): PrivateScope, Public, HideBySig, SpecialName, RTSpecialName
+  Properties:
+    System.String Data 'get set' : 
+    System.Xml.XmlNodeType NodeType 'get ' : 
+    System.String Target 'get set' : 
+  Methods:
+    get_Data(): PrivateScope, Public, HideBySig, SpecialName
+    set_Data(String): PrivateScope, Public, HideBySig, SpecialName
+    get_NodeType(): PrivateScope, Public, Virtual, HideBySig, SpecialName
+    get_Target(): PrivateScope, Public, HideBySig, SpecialName
+    set_Target(String): PrivateScope, Public, HideBySig, SpecialName
+    WriteTo(XmlWriter): PrivateScope, Public, Virtual, HideBySig
+Class System.Xml.Linq.XDeclaration: AutoLayout, AnsiClass, Class, Public, BeforeFieldInit
+    Void .ctor(System.String, System.String, System.String): PrivateScope, Public, HideBySig, SpecialName, RTSpecialName
+    Void .ctor(System.Xml.Linq.XDeclaration): PrivateScope, Public, HideBySig, SpecialName, RTSpecialName
+  Properties:
+    System.String Encoding 'get set' : 
+    System.String Standalone 'get set' : 
+    System.String Version 'get set' : 
+  Methods:
+    get_Encoding(): PrivateScope, Public, HideBySig, SpecialName
+    set_Encoding(String): PrivateScope, Public, HideBySig, SpecialName
+    get_Standalone(): PrivateScope, Public, HideBySig, SpecialName
+    set_Standalone(String): PrivateScope, Public, HideBySig, SpecialName
+    get_Version(): PrivateScope, Public, HideBySig, SpecialName
+    set_Version(String): PrivateScope, Public, HideBySig, SpecialName
+    ToString(): PrivateScope, Public, Virtual, HideBySig
+Class System.Xml.Linq.XDocumentType: AutoLayout, AnsiClass, Class, Public, BeforeFieldInit
+  :System.Xml.Linq.XNode
+    Void .ctor(System.String, System.String, System.String, System.String): PrivateScope, Public, HideBySig, SpecialName, RTSpecialName
+    Void .ctor(System.Xml.Linq.XDocumentType): PrivateScope, Public, HideBySig, SpecialName, RTSpecialName
+  Properties:
+    System.String InternalSubset 'get set' : 
+    System.String Name 'get set' : 
+    System.Xml.XmlNodeType NodeType 'get ' : 
+    System.String PublicId 'get set' : 
+    System.String SystemId 'get set' : 
+  Methods:
+    get_InternalSubset(): PrivateScope, Public, HideBySig, SpecialName
+    set_InternalSubset(String): PrivateScope, Public, HideBySig, SpecialName
+    get_Name(): PrivateScope, Public, HideBySig, SpecialName
+    set_Name(String): PrivateScope, Public, HideBySig, SpecialName
+    get_NodeType(): PrivateScope, Public, Virtual, HideBySig, SpecialName
+    get_PublicId(): PrivateScope, Public, HideBySig, SpecialName
+    set_PublicId(String): PrivateScope, Public, HideBySig, SpecialName
+    get_SystemId(): PrivateScope, Public, HideBySig, SpecialName
+    set_SystemId(String): PrivateScope, Public, HideBySig, SpecialName
+    WriteTo(XmlWriter): PrivateScope, Public, Virtual, HideBySig
+Class System.Xml.Linq.XAttribute: AutoLayout, AnsiClass, Class, Public, BeforeFieldInit
+  :System.Xml.Linq.XObject
+    Void .ctor(System.Xml.Linq.XName, System.Object): PrivateScope, Public, HideBySig, SpecialName, RTSpecialName
+    Void .ctor(System.Xml.Linq.XAttribute): PrivateScope, Public, HideBySig, SpecialName, RTSpecialName
+  Properties:
+    System.Collections.Generic.IEnumerable`1[System.Xml.Linq.XAttribute] EmptySequence 'get ' : 
+    Boolean IsNamespaceDeclaration 'get ' : 
+    System.Xml.Linq.XName Name 'get ' : 
+    System.Xml.Linq.XAttribute NextAttribute 'get ' : 
+    System.Xml.XmlNodeType NodeType 'get ' : 
+    System.Xml.Linq.XAttribute PreviousAttribute 'get ' : 
+    System.String Value 'get set' : 
+  Methods:
+    get_EmptySequence(): PrivateScope, Public, Static, HideBySig, SpecialName
+    get_IsNamespaceDeclaration(): PrivateScope, Public, HideBySig, SpecialName
+    get_Name(): PrivateScope, Public, HideBySig, SpecialName
+    get_NextAttribute(): PrivateScope, Public, HideBySig, SpecialName
+    get_NodeType(): PrivateScope, Public, Virtual, HideBySig, SpecialName
+    get_PreviousAttribute(): PrivateScope, Public, HideBySig, SpecialName
+    get_Value(): PrivateScope, Public, HideBySig, SpecialName
+    set_Value(String): PrivateScope, Public, HideBySig, SpecialName
+    Remove(): PrivateScope, Public, HideBySig
+    SetValue(Object): PrivateScope, Public, HideBySig
+    ToString(): PrivateScope, Public, Virtual, HideBySig
+    op_Explicit(XAttribute): PrivateScope, Public, Static, HideBySig, SpecialName
+    op_Explicit(XAttribute): PrivateScope, Public, Static, HideBySig, SpecialName
+    op_Explicit(XAttribute): PrivateScope, Public, Static, HideBySig, SpecialName
+    op_Explicit(XAttribute): PrivateScope, Public, Static, HideBySig, SpecialName
+    op_Explicit(XAttribute): PrivateScope, Public, Static, HideBySig, SpecialName
+    op_Explicit(XAttribute): PrivateScope, Public, Static, HideBySig, SpecialName
+    op_Explicit(XAttribute): PrivateScope, Public, Static, HideBySig, SpecialName
+    op_Explicit(XAttribute): PrivateScope, Public, Static, HideBySig, SpecialName
+    op_Explicit(XAttribute): PrivateScope, Public, Static, HideBySig, SpecialName
+    op_Explicit(XAttribute): PrivateScope, Public, Static, HideBySig, SpecialName
+    op_Explicit(XAttribute): PrivateScope, Public, Static, HideBySig, SpecialName
+    op_Explicit(XAttribute): PrivateScope, Public, Static, HideBySig, SpecialName
+    op_Explicit(XAttribute): PrivateScope, Public, Static, HideBySig, SpecialName
+    op_Explicit(XAttribute): PrivateScope, Public, Static, HideBySig, SpecialName
+    op_Explicit(XAttribute): PrivateScope, Public, Static, HideBySig, SpecialName
+    op_Explicit(XAttribute): PrivateScope, Public, Static, HideBySig, SpecialName
+    op_Explicit(XAttribute): PrivateScope, Public, Static, HideBySig, SpecialName
+    op_Explicit(XAttribute): PrivateScope, Public, Static, HideBySig, SpecialName
+    op_Explicit(XAttribute): PrivateScope, Public, Static, HideBySig, SpecialName
+    op_Explicit(XAttribute): PrivateScope, Public, Static, HideBySig, SpecialName
+    op_Explicit(XAttribute): PrivateScope, Public, Static, HideBySig, SpecialName
+    op_Explicit(XAttribute): PrivateScope, Public, Static, HideBySig, SpecialName
+    op_Explicit(XAttribute): PrivateScope, Public, Static, HideBySig, SpecialName
+    op_Explicit(XAttribute): PrivateScope, Public, Static, HideBySig, SpecialName
+    op_Explicit(XAttribute): PrivateScope, Public, Static, HideBySig, SpecialName
+Class System.Xml.Linq.XStreamingElement: AutoLayout, AnsiClass, Class, Public, BeforeFieldInit
+    Void .ctor(System.Xml.Linq.XName): PrivateScope, Public, HideBySig, SpecialName, RTSpecialName
+    Void .ctor(System.Xml.Linq.XName, System.Object): PrivateScope, Public, HideBySig, SpecialName, RTSpecialName
+    Void .ctor(System.Xml.Linq.XName, System.Object[]): PrivateScope, Public, HideBySig, SpecialName, RTSpecialName
+  Properties:
+    System.Xml.Linq.XName Name 'get set' : 
+  Methods:
+    get_Name(): PrivateScope, Public, HideBySig, SpecialName
+    set_Name(XName): PrivateScope, Public, HideBySig, SpecialName
+    Add(Object): PrivateScope, Public, HideBySig
+    Add(Object[]): PrivateScope, Public, HideBySig
+    Save(String): PrivateScope, Public, HideBySig
+    Save(String, SaveOptions): PrivateScope, Public, HideBySig
+    Save(TextWriter): PrivateScope, Public, HideBySig
+    Save(TextWriter, SaveOptions): PrivateScope, Public, HideBySig
+    Save(XmlWriter): PrivateScope, Public, HideBySig
+    ToString(): PrivateScope, Public, Virtual, HideBySig
+    ToString(SaveOptions): PrivateScope, Public, HideBySig
+    WriteTo(XmlWriter): PrivateScope, Public, HideBySig
+Class System.Xml.Linq.Extensions: AutoLayout, AnsiClass, Class, Public, Abstract, Sealed, BeforeFieldInit
+  Methods:
+    Attributes(IEnumerable`1): PrivateScope, Public, Static, HideBySig
+    Attributes(IEnumerable`1, XName): PrivateScope, Public, Static, HideBySig
+    Ancestors(IEnumerable`1): PrivateScope, Public, Static, HideBySig
+    Ancestors(IEnumerable`1, XName): PrivateScope, Public, Static, HideBySig
+    AncestorsAndSelf(IEnumerable`1): PrivateScope, Public, Static, HideBySig
+    AncestorsAndSelf(IEnumerable`1, XName): PrivateScope, Public, Static, HideBySig
+    Nodes(IEnumerable`1): PrivateScope, Public, Static, HideBySig
+    DescendantNodes(IEnumerable`1): PrivateScope, Public, Static, HideBySig
+    Descendants(IEnumerable`1): PrivateScope, Public, Static, HideBySig
+    Descendants(IEnumerable`1, XName): PrivateScope, Public, Static, HideBySig
+    DescendantNodesAndSelf(IEnumerable`1): PrivateScope, Public, Static, HideBySig
+    DescendantsAndSelf(IEnumerable`1): PrivateScope, Public, Static, HideBySig
+    DescendantsAndSelf(IEnumerable`1, XName): PrivateScope, Public, Static, HideBySig
+    Elements(IEnumerable`1): PrivateScope, Public, Static, HideBySig
+    Elements(IEnumerable`1, XName): PrivateScope, Public, Static, HideBySig
+    InDocumentOrder(IEnumerable`1): PrivateScope, Public, Static, HideBySig
+    Remove(IEnumerable`1): PrivateScope, Public, Static, HideBySig
+    Remove(IEnumerable`1): PrivateScope, Public, Static, HideBySig
+Class System.Xml.XPath.Extensions: AutoLayout, AnsiClass, Class, Public, Abstract, Sealed, BeforeFieldInit
+  Methods:
+    CreateNavigator(XNode): PrivateScope, Public, Static, HideBySig
+    CreateNavigator(XNode, XmlNameTable): PrivateScope, Public, Static, HideBySig
+    XPathEvaluate(XNode, String): PrivateScope, Public, Static, HideBySig
+    XPathEvaluate(XNode, String, IXmlNamespaceResolver): PrivateScope, Public, Static, HideBySig
+    XPathSelectElement(XNode, String): PrivateScope, Public, Static, HideBySig
+    XPathSelectElement(XNode, String, IXmlNamespaceResolver): PrivateScope, Public, Static, HideBySig
+    XPathSelectElements(XNode, String): PrivateScope, Public, Static, HideBySig
+    XPathSelectElements(XNode, String, IXmlNamespaceResolver): PrivateScope, Public, Static, HideBySig
+Class System.Xml.Schema.Extensions: AutoLayout, AnsiClass, Class, Public, Abstract, Sealed, BeforeFieldInit
+  Methods:
+    GetSchemaInfo(XElement): PrivateScope, Public, Static, HideBySig
+    GetSchemaInfo(XAttribute): PrivateScope, Public, Static, HideBySig
+    Validate(XDocument, XmlSchemaSet, ValidationEventHandler): PrivateScope, Public, Static, HideBySig
+    Validate(XDocument, XmlSchemaSet, ValidationEventHandler, Boolean): PrivateScope, Public, Static, HideBySig
+    Validate(XElement, XmlSchemaObject, XmlSchemaSet, ValidationEventHandler): PrivateScope, Public, Static, HideBySig
+    Validate(XElement, XmlSchemaObject, XmlSchemaSet, ValidationEventHandler, Boolean): PrivateScope, Public, Static, HideBySig
+    Validate(XAttribute, XmlSchemaObject, XmlSchemaSet, ValidationEventHandler): PrivateScope, Public, Static, HideBySig
+    Validate(XAttribute, XmlSchemaObject, XmlSchemaSet, ValidationEventHandler, Boolean): PrivateScope, Public, Static, HideBySig
